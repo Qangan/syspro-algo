@@ -45,7 +45,7 @@ def solution(arr: list[int]):
 for i in range(1000):
     arr = gen_string(i), 
     l = len(arr) - 1
-    if sorted(arr)[l//2] != kth(arr, l//2):
+    if sorted(arr)[l // 2] != kth(arr, l // 2):
         print("TEST NOT PASSED", sorted(arr), kth(arr, l // 2))
         quit()
 print("All tests passed!")
