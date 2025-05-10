@@ -5,10 +5,11 @@ from bitarray import bitarray
 class BloomFilter:
     def __init__(self, n, prob):
         self.prob = prob
-        self.size = self.next_prime(int(-(n * math.log(prob))/(math.log(2)**2)))
-        self.hashes = int((self.size / n) * math.log(2))
+        self.size = int(-(n * math.log(prob))/(math.log(2)**2))
+        self.hashes = int(-(math.log(prob) / math.log(2)))
         self.storage = bitarray(self.size)
-        self.hash_arrays = [[random.randint(0, self.size - 1) for _ in range(4)] for _ in range(self.hashes)]
+        self.storage.setall(0)
+        self.hash_arrays = [[random.randint(0, 100000) for _ in range(4)] for _ in range(self.hashes)]
     def next_prime(self, n: int) -> int:
         if n <= 1:
             return 2
