@@ -1,6 +1,7 @@
+import re
 class Operator:
     # 1 - левая ассоциативность, 0 - правая
-    def __init__(self, symbol: int, prio: int, assoc: 1 | 0 = 1):
+    def __init__(self, symbol: str, prio: int, assoc: 1 | 0 = 1):
         self.symbol = symbol
         self.prio = prio
         self.assoc = assoc
@@ -13,7 +14,6 @@ operators = {
     '/': Operator('/', 2),
     '^': Operator('^', 1, 0)
 }
-
 
 def to_postfix(expression: str) -> str:
     stack, output = [], []
@@ -38,6 +38,8 @@ def to_postfix(expression: str) -> str:
 
     return ' '.join(output)
 
-
-expression = "( 1 + 2 ^ ( 9 / 10 ) ) + 2 * 3 / 4 - 12 ^ ( 12 * 10 ^ ( 1 + 2 ) )"
-print(to_postfix(expression))
+strs = 'a'
+while strs:
+    strs = input()
+    expression = re.sub(r'([\^+*-])', r' \1 ', strs)
+    print(to_postfix(expression))
