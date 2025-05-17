@@ -6,22 +6,13 @@ def gen_string(leng: int) -> list:
 
 def part(arr: list[int], l: int, h: int) -> int:
     def _part(arr: list[int], l: int, h: int) -> int:
-        pivot = arr[l]
-        i, j = l - 1, h + 1
-        while True:
-            while True:
-                i += 1
-                if not (i < j and arr[i] < pivot):
-                    break
-            while True:
-                j -= 1
-                if not (j >= 1 and arr[j] >= pivot):
-                    break
-            if i < j:
-                arr[i], arr[j] = arr[j], arr[i]
-            else:
-                return j
-
+        pivot = arr[h]
+        i = l
+        for j in range(l, h):
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1 
+        arr[i], arr[h] = arr[h], arr[i]
+        return i
     r = random.randint(l, h)
     arr[r], arr[l] = arr[l], arr[r]
     return _part(arr, l, h)
