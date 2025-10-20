@@ -26,7 +26,7 @@ class Treap:
             node.count = 1 + self.cnt(node.l) + self.cnt(node.r)
             node.sum = node.key + self.cur_sum(node.l) + self.cur_sum(node.r)
     
-    def merge(self, left, right) -> Node:
+    def merge(self, left: Node, right: Node) -> Node:
         if not left or not right:
             return left if left else right
         if left.prio > right.prio:
@@ -52,7 +52,7 @@ class Treap:
             self.update(node)
             return node, RR
 
-    def insert(self, pos, value) -> None:
+    def insert(self, pos: int, value: int) -> None:
         new_T = Node(value)
         if self.root is None:
             self.root = new_T
@@ -60,12 +60,12 @@ class Treap:
         L, R = self.splitBySize(self.root, pos)
         self.root = self.merge(self.merge(L, new_T), R)
 
-    def erase(self, pos, count=0) -> None:
+    def erase(self, pos: int, count: int =0) -> None:
         L, R = self.splitBySize(self.root, pos)
         E, RR = self.splitBySize(R, 1 if not count else count)
         self.root = self.merge(L, RR)
 
-    def sum(self, f, to) -> int: 
+    def sum(self, f: int, to: int) -> int: 
         L, R = self.splitBySize(self.root, f)
         RL, RR = self.splitBySize(R, to - f + 1)
         res = self.cur_sum(RL)
